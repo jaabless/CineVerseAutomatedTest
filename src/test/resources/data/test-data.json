@@ -1,0 +1,12 @@
+{
+  "validPost": {
+    "title": "foo",
+    "body": "bar",
+    "userId": 1
+  },
+  "invalidPost": {
+    "title": "",
+    "body": "",
+    "userId": -1
+  }
+}
