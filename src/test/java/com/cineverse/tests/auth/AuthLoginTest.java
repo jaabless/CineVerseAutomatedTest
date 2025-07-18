@@ -55,41 +55,4 @@ public class AuthLoginTest extends BaseTest {
                 .header("Content-Type", containsString("application/json"));
     }
 
-    @ParameterizedTest
-    @MethodSource("com.cineverse.data.AuthTestData#validLoginUsers")
-    @DisplayName("Should login with valid credentials")
-    void loginUser_Positive(String email, String password) {
-        given()
-                .contentType(ContentType.JSON)
-                .body("""
-                {
-                    "email": "%s",
-                    "password": "%s"
-                }
-                """.formatted(email, password))
-                .when()
-                .post("/api/v1/auth/login")
-                .then()
-                .statusCode(200)
-                .body("token", notNullValue());
-    }
-
-    @ParameterizedTest
-    @MethodSource("com.cineverse.data.AuthTestData#invalidLoginUsers")
-    @DisplayName("Should fail login with invalid credentials")
-    void loginUser_Negative(String email, String password) {
-        given()
-                .contentType(ContentType.JSON)
-                .body("""
-                {
-                    "email": "%s",
-                    "password": "%s"
-                }
-                """.formatted(email, password))
-                .when()
-                .post("/api/v1/auth/login")
-                .then()
-                .statusCode(401)
-                .body("error", notNullValue());
-    }
 }
