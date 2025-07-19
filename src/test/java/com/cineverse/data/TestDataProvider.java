@@ -11,9 +11,9 @@ public class TestDataProvider {
 
     public static Stream<Arguments> validRegisterUserCredentials() {
         return Stream.of(
-                Arguments.of(new AuthRegisterData("Jeffery", "Asamoah", "newuseremail@gmail.com!", "Password123@"),
+                Arguments.of(new AuthRegisterData("Jeffery", "Asamoah", "newuseremail@gmail.com", "Password123@"),
                         200),
-                Arguments.of(new AuthRegisterData("New", "User", "new111111email@gmail.com!", "Password123@"),
+                Arguments.of(new AuthRegisterData("New", "User", "new111111email@gmail.com", "Password123@"),
                         200),
                 Arguments.of(new AuthRegisterData("John", "Doe", uniqueEmail(), "Password123@"),
                         200),

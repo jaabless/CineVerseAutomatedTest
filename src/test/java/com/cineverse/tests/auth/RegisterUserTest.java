@@ -6,7 +6,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -14,7 +13,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 @DisplayName("POST /api/v1/auth/register Tests")
-public class AuthRegisterTest extends BaseTest {
+public class RegisterUserTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("com.cineverse.data.AuthTestData#validRegisterUsers")

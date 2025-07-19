@@ -2,7 +2,6 @@ package com.cineverse.tests.auth;
 
 import com.cineverse.base.BaseTest;
 import com.cineverse.data.TestDataProvider;
-import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +12,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 @DisplayName("POST /api/v1/auth/login Tests")
-public class AuthLoginTest extends BaseTest {
+public class UserLoginTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("com.cineverse.data.TestDataProvider#validLoginCredentials")
