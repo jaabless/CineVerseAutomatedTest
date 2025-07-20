@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MediaTrendingNowResponse",
+  "type": "object",
+  "required": ["data", "total", "limit", "timeRange"],
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["mediaId", "title", "genre", "trendingScore", "lastUpdated"],
+        "properties": {
+          "mediaId": { "type": "integer" },
+          "title": { "type": "string" },
+          "genre": { "type": "string" },
+          "trendingScore": { "type": "number" },
+          "lastUpdated": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "total": { "type": "integer" },
+    "limit": { "type": "integer" },
+    "timeRange": { "type": "string" }
+  },
+  "additionalProperties": false
+}

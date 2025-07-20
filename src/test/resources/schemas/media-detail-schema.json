@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MediaDetailResponse",
+  "type": "object",
+  "required": ["data"],
+  "properties": {
+    "data": {
+      "type": "object",
+      "required": [
+        "mediaId",
+        "title",
+        "synopsis",
+        "releaseYear",
+        "language",
+        "averageRating",
+        "genres",
+        "episodeList",
+        "castMembers",
+        "reviews"
+      ],
+      "properties": {
+        "mediaId": { "type": "integer" },
+        "title": { "type": "string" },
+        "synopsis": { "type": "string" },
+        "releaseYear": { "type": "integer" },
+        "language": { "type": "string" },
+        "averageRating": { "type": "number" },
+        "genres": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "episodeList": {
+          "type": "array",
+          "items": { "type": "integer" }
+        },
+        "castMembers": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "reviews": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

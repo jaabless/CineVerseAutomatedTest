@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MediaRecommendationsResponse",
+  "type": "object",
+  "required": ["data", "total", "limit", "userId"],
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["mediaId", "title", "genre", "recommendationScore", "lastUpdated"],
+        "properties": {
+          "mediaId": { "type": "integer" },
+          "title": { "type": "string" },
+          "genre": { "type": "string" },
+          "recommendationScore": { "type": "number" },
+          "lastUpdated": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "total": { "type": "integer" },
+    "limit": { "type": "integer" },
+    "userId": { "type": "integer" }
+  },
+  "additionalProperties": false
+}
