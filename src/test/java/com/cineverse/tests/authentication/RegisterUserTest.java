@@ -1,6 +1,9 @@
 package com.cineverse.tests.authentication;
 
 import com.cineverse.base.BaseTest;
+import com.cineverse.data.DataValues;
+import com.cineverse.data.Endpoints;
+import com.cineverse.data.StatusCodes;
 import com.cineverse.data.TestDataProvider;
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
@@ -15,26 +18,6 @@ import static org.hamcrest.Matchers.*;
 @DisplayName("POST /api/v1/auth/register Tests")
 public class RegisterUserTest extends BaseTest {
 
-    @ParameterizedTest
-    @MethodSource("com.cineverse.data.AuthTestData#validRegisterUsers")
-    @DisplayName("Should register a new user successfully")
-    void registerUser_Positive(String firstName, String lastName, String email, String password, int expectedStatusCode) {
-        given()
-                .spec(requestSpec)
-                .body("""
-                {
-                    "firstName": "%s",
-                    "lastName": "%s",
-                    "email": "%s",
-                    "password": "%s"
-                }
-                """.formatted(firstName, lastName, email, password))
-                .when()
-                .post("/api/v1/auth/register")
-                .then()
-                .statusCode(anyOf(is(200), is(201)));
-//                .body("message", containsStringIgnoringCase("success"));
-    }
 
     @ParameterizedTest
     @MethodSource("com.cineverse.data.TestDataProvider#validRegisterUserCredentials")
@@ -46,13 +29,13 @@ public class RegisterUserTest extends BaseTest {
                 .body(authData)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/api/v1/auth/register")
+                .post(Endpoints.AUTH_REGISTER)
                 .then()
                 .statusCode(expectedStatusCode)
                 .contentType(ContentType.JSON)
-                .body("data.firstName", expectedStatusCode ==200 ? equalTo(authData.getFirstName()) : anything())
-                .body("data.lastName", expectedStatusCode == 200 ? equalTo(authData.getLastName()) : anything())
-                .body("data.email", expectedStatusCode == 200 ? equalTo(authData.getEmail()) : anything())
+                .body(DataValues.DATA_FIRSTNAME, expectedStatusCode ==StatusCodes.OK ? equalTo(authData.getFirstName()) : anything())
+                .body(DataValues.DATA_LASTNAME, expectedStatusCode == StatusCodes.OK ? equalTo(authData.getLastName()) : anything())
+                .body(DataValues.DATA_EMAIL, expectedStatusCode == StatusCodes.OK ? equalTo(authData.getEmail()) : anything())
                 .header("Content-Type", containsString("application/json"));
     }
 
@@ -66,11 +49,11 @@ public class RegisterUserTest extends BaseTest {
                 .body(authData)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/api/v1/auth/register")
+                .post(Endpoints.AUTH_REGISTER)
                 .then()
                 .statusCode(expectedStatusCode)
                 .contentType(ContentType.JSON)
-                .body("message", containsStringIgnoringCase("error"))
+                .body(DataValues.MESSAGE, containsStringIgnoringCase("error"))
                 .header("Content-Type", containsString("application/json"));
     }
 
@@ -85,13 +68,13 @@ public class RegisterUserTest extends BaseTest {
                 .body(authData)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/api/v1/auth/register")
+                .post(Endpoints.AUTH_REGISTER)
                 .then()
                 .statusCode(expectedStatusCode)
                 .contentType(ContentType.JSON)
-                .body("firstName", expectedStatusCode == 200 ? equalTo(authData.getFirstName()) : anything())
-                .body("lastName", expectedStatusCode == 200 ? equalTo(authData.getLastName()) : anything())
-                .body("email", expectedStatusCode == 200 ? equalTo(authData.getEmail()) : anything())
+                .body(DataValues.DATA_FIRSTNAME, expectedStatusCode ==StatusCodes.OK ? equalTo(authData.getFirstName()) : anything())
+                .body(DataValues.DATA_LASTNAME, expectedStatusCode == StatusCodes.OK ? equalTo(authData.getLastName()) : anything())
+                .body(DataValues.DATA_EMAIL, expectedStatusCode == StatusCodes.OK ? equalTo(authData.getEmail()) : anything())
                 .header("Content-Type", containsString("application/json"));
     }
 

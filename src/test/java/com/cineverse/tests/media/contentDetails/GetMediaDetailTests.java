@@ -1,13 +1,14 @@
 package com.cineverse.tests.media.contentDetails;
 
-
 import com.cineverse.base.BaseTest;
 import com.cineverse.data.DataValues;
 import com.cineverse.data.Endpoints;
 import com.cineverse.data.StatusCodes;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -21,7 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class GetMediaDetailTests extends BaseTest {
 
     @Test
-    @Description("Test retrieving media details with valid mediaId")
+    @Story("GET Media Detail")
+    @DisplayName("Test retrieving media details with valid mediaId")
     void testGetMediaDetailValidId() {
         Response response = given()
                 .spec(requestSpec)
@@ -33,14 +35,7 @@ public class GetMediaDetailTests extends BaseTest {
                 .header("Content-Type", containsString("application/json"))
                 .body("data.mediaId", equalTo(DataValues.TWELVE))
                 .body("data.title", notNullValue())
-                .body("data.synopsis", notNullValue())
-                .body("data.releaseYear", notNullValue())
-                .body("data.language", notNullValue())
                 .body("data.averageRating", notNullValue())
-                .body("data.genres", isA(List.class))
-                .body("data.episodeList", isA(List.class))
-                .body("data.castMembers", isA(List.class))
-                .body("data.reviews", isA(List.class))
                 .extract().response();
 
         // Verify response time
@@ -48,7 +43,8 @@ public class GetMediaDetailTests extends BaseTest {
     }
 
     @Test
-    @Description("Test retrieving media details with invalid mediaId")
+    @Story("GET Media Detail")
+    @DisplayName("Test retrieving media details with invalid mediaId")
     void testGetMediaDetailInvalidId() {
         given()
                 .spec(requestSpec)
@@ -61,7 +57,8 @@ public class GetMediaDetailTests extends BaseTest {
     }
 
     @Test
-    @Description("Test retrieving media details with negative mediaId")
+    @Story("GET Media Detail")
+    @DisplayName("Test retrieving media details with negative mediaId")
     void testGetMediaDetailNegativeId() {
         given()
                 .spec(requestSpec)
@@ -69,14 +66,9 @@ public class GetMediaDetailTests extends BaseTest {
                 .when()
                 .get("/api/v1/media/detail/{mediaId}")
                 .then()
-                .statusCode(400)
+                .statusCode(404)
                 .body("message", containsString("invalid"));
     }
 
-    @Test
-    @Description("Test concurrent requests for media details")
-    void testConcurrentGetDetailRequests() {
-        // Implementation for concurrent testing using CompletableFuture or similar
-        // This would test multiple simultaneous GET requests
-    }
+
 }

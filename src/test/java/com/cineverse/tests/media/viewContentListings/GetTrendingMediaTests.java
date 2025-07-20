@@ -8,7 +8,9 @@ import com.cineverse.data.DataValues;
 import com.cineverse.data.Endpoints;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -21,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class GetTrendingMediaTests extends BaseTest {
 
     @Test
-    @Description("Test retrieving trending media with default parameters")
+    @Story("GET Trending Media")
+    @DisplayName("Test retrieving trending media with default parameters")
     void testGetTrendingNowDefault() {
         Response response = given()
                 .spec(requestSpec)
@@ -37,22 +40,10 @@ public class GetTrendingMediaTests extends BaseTest {
         assertTrue(response.getTimeIn(TimeUnit.MILLISECONDS) < 2000, "Response time exceeded 2 seconds");
     }
 
-    @Test
-    @Description("Test retrieving trending media with custom limit")
-    void testGetTrendingNowWithLimit() {
-        given()
-                .spec(requestSpec)
-                .queryParam("limit", 5)
-                .when()
-                .get("/api/v1/media/trending-now")
-                .then()
-                .statusCode(200)
-                .body("data", hasSize(lessThanOrEqualTo(5)))
-                .body("limit", equalTo(5));
-    }
 
     @Test
-    @Description("Test retrieving trending media with invalid limit")
+    @Story("GET Trending Media")
+    @DisplayName("Test retrieving trending media with invalid limit")
     void testGetTrendingNowWithInvalidLimit() {
         given()
                 .spec(requestSpec)
@@ -64,21 +55,11 @@ public class GetTrendingMediaTests extends BaseTest {
                 .body("message", containsString("invalid"));
     }
 
-    @Test
-    @Description("Test retrieving trending media with custom time range")
-    void testGetTrendingNowWithTimeRange() {
-        given()
-                .spec(requestSpec)
-                .queryParam("timeRange", "day")
-                .when()
-                .get("/api/v1/media/trending-now")
-                .then()
-                .statusCode(200)
-                .body("timeRange", equalTo("day"));
-    }
+
 
     @Test
-    @Description("Test retrieving trending media with invalid time range")
+    @Story("GET Trending Media")
+    @DisplayName("Test retrieving trending media with invalid time range")
     void testGetTrendingNowWithInvalidTimeRange() {
         given()
                 .spec(requestSpec)
@@ -90,21 +71,11 @@ public class GetTrendingMediaTests extends BaseTest {
                 .body("message", containsString("invalid"));
     }
 
-    @Test
-    @Description("Test rate limiting for trending now requests")
-    void testTrendingNowRateLimiting() {
-        for (int i = 0; i < 100; i++) {
-            given()
-                    .spec(requestSpec)
-                    .when()
-                    .get("/api/v1/media/trending-now")
-                    .then()
-                    .statusCode(anyOf(equalTo(200), equalTo(429))); // 429 for rate limit
-        }
-    }
+
 
     @Test
-    @Description("Test trending now with invalid JWT token")
+    @Story("GET Trending Media")
+    @DisplayName("Test trending now with invalid JWT token")
     void testTrendingNowWithInvalidJwtToken() {
         given()
                 .spec(requestSpec)

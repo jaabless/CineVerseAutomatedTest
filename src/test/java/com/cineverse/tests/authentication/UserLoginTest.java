@@ -1,6 +1,9 @@
 package com.cineverse.tests.authentication;
 
 import com.cineverse.base.BaseTest;
+import com.cineverse.data.DataValues;
+import com.cineverse.data.Endpoints;
+import com.cineverse.data.StatusCodes;
 import com.cineverse.data.TestDataProvider;
 import io.qameta.allure.Story;
 import io.restassured.http.ContentType;
@@ -24,13 +27,13 @@ public class UserLoginTest extends BaseTest {
                 .body(authData)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/api/v1/auth/login")
+                .post(Endpoints.AUTH_LOGIN)
                 .then()
                 .statusCode(expectedStatusCode)
                 .contentType(ContentType.JSON)
-                .body("data.email", expectedStatusCode == 200 ? equalTo(authData.getEmail()) : anything())
-                .body("data.token", expectedStatusCode == 200 ? notNullValue() : anything())
-                .body("success", expectedStatusCode == 200 ? equalTo(true) : anything())
+                .body(DataValues.DATA_EMAIL, expectedStatusCode == StatusCodes.OK ? equalTo(authData.getEmail()) : anything())
+                .body(DataValues.DATA_TOKEN, expectedStatusCode == StatusCodes.OK ? notNullValue() : anything())
+                .body(DataValues.SUCCESS, expectedStatusCode == StatusCodes.OK ? equalTo(true) : anything())
                 .header("Content-Type", containsString("application/json"));
     }
 
@@ -44,13 +47,13 @@ public class UserLoginTest extends BaseTest {
                 .body(authData)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/api/v1/auth/login")
+                .post(Endpoints.AUTH_LOGIN)
                 .then()
                 .statusCode(expectedStatusCode)
                 .contentType(ContentType.JSON)
-                .body("data", expectedStatusCode == 200 ? equalTo(nullValue()) : anything())
-                .body("success", expectedStatusCode == 200 ? equalTo(false) : anything())
-                .body("message", containsStringIgnoringCase("invalid"))
+                .body(DataValues.DATA, expectedStatusCode == StatusCodes.OK ? equalTo(nullValue()) : anything())
+                .body(DataValues.SUCCESS, expectedStatusCode == StatusCodes.OK ? equalTo(false) : anything())
+                .body(DataValues.MESSAGE, containsStringIgnoringCase("invalid"))
                 .header("Content-Type", containsString("application/json"));
     }
 

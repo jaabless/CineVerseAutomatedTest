@@ -5,6 +5,7 @@ import com.cineverse.data.DataParams;
 import com.cineverse.data.DataValues;
 import com.cineverse.data.Endpoints;
 import com.cineverse.data.StatusCodes;
+import io.qameta.allure.Story;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,8 +19,9 @@ public class GetSearchMediaTest extends BaseTest {
     private final String ENDPOINT = "/api/v1/media/search";
 
     @Test
+    @Story("GET Search/Filter Media")
     @DisplayName("Search by title returns matching media")
-    void searchByTitle_Positive() {
+    void testSearchByTitle() {
         given()
                 .accept(ContentType.JSON)
                 .queryParam("title", DataParams.SAMPLE_MOVIE_TEN)
@@ -33,8 +35,9 @@ public class GetSearchMediaTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Search by genre returns relevant results")
-    void searchByGenre_Positive() {
+    @Story("GET Search/Filter Media")
+    @DisplayName("Search by genre with pagination returns results")
+    void testSearchByGenre() {
         given()
                 .accept(ContentType.JSON)
                 .queryParam("genre", "ACTION")
@@ -48,6 +51,7 @@ public class GetSearchMediaTest extends BaseTest {
     }
 
     @Test
+    @Story("GET Search/Filter Media")
     @DisplayName("Search by cast returns matches (if cast is indexed)")
     void searchByCast_Positive() {
         given()
@@ -61,6 +65,7 @@ public class GetSearchMediaTest extends BaseTest {
     }
 
     @Test
+    @Story("GET Search/Filter Media")
     @DisplayName("Search with multiple filters")
     void searchByTitleAndGenre() {
         given()
@@ -75,6 +80,7 @@ public class GetSearchMediaTest extends BaseTest {
     }
 
     @Test
+    @Story("GET Search/Filter Media")
     @DisplayName("Search with no matching result returns empty data")
     void search_NoMatch() {
         given()
@@ -89,6 +95,7 @@ public class GetSearchMediaTest extends BaseTest {
     }
 
     @Test
+    @Story("GET Search/Filter Media")
     @DisplayName("Search returns response under 2 seconds")
     void search_PerformanceTest() {
         given()

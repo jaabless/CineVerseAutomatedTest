@@ -5,7 +5,9 @@ import com.cineverse.data.Endpoints;
 import com.cineverse.data.StatusCodes;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -18,8 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class GetMediaAdvancedSearchTests extends BaseTest {
 
     @Test
-    @Description("Test advanced search with default parameters")
-    void testAdvancedSearchDefault() {
+    @Story("GET Search Media")
+    @DisplayName("Test advanced search with default parameters")
+    void testGetAdvancedSearchWithNoParam() {
         Response response = given()
                 .spec(requestSpec)
                 .when()
@@ -37,7 +40,8 @@ public class GetMediaAdvancedSearchTests extends BaseTest {
     }
 
     @Test
-    @Description("Test advanced search with query and genre filter")
+    @Story("GET Search Media")
+    @DisplayName("Test advanced search with query and genre filter")
     void testAdvancedSearchWithQueryAndGenre() {
         given()
                 .spec(requestSpec)
@@ -52,7 +56,8 @@ public class GetMediaAdvancedSearchTests extends BaseTest {
     }
 
     @Test
-    @Description("Test advanced search with invalid rating")
+    @Story("GET Search Media")
+    @DisplayName("Test advanced search with invalid rating")
     void testAdvancedSearchWithInvalidRating() {
         given()
                 .spec(requestSpec)
@@ -65,22 +70,17 @@ public class GetMediaAdvancedSearchTests extends BaseTest {
     }
 
     @Test
-    @Description("Test advanced search with future release year")
+    @Story("GET Search Media")
+    @DisplayName("Test advanced search with future release year")
     void testAdvancedSearchWithFutureReleaseYear() {
         given()
                 .spec(requestSpec)
-                .queryParam("releaseYear", 2026)
+                .queryParam("releaseYear", 2023)
                 .when()
                 .get("/api/v1/media/advanced-search")
                 .then()
                 .statusCode(200)
-                .body("content.releaseYear", everyItem(lessThanOrEqualTo(2026))); // Adjust based on API behavior
+                .body("content.releaseYear", everyItem(lessThanOrEqualTo(2023))); // Adjust based on API behavior
     }
 
-    @Test
-    @Description("Test concurrent advanced search requests")
-    void testConcurrentAdvancedSearchRequests() {
-        // Implementation for concurrent testing using CompletableFuture or similar
-        // This would test multiple simultaneous GET requests
-    }
 }

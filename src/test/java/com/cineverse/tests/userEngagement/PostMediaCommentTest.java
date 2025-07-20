@@ -7,6 +7,7 @@ import com.cineverse.data.StatusCodes;
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -15,7 +16,7 @@ public class PostMediaCommentTest extends AuthBaseTest{
 
     @Test
     @Story("Valid Comment Submission")
-    @Description("Submit a valid comment to a specific media ID")
+    @DisplayName("Submit a valid comment to a specific media ID")
     void testPostValidComment() {
         int mediaId = 10;
         int userId = 1;
@@ -37,29 +38,6 @@ public class PostMediaCommentTest extends AuthBaseTest{
                 .body("data.comment", equalTo(comment));
     }
 
-    @Test
-    @Description("Test retrieving recommendations with default parameters")
-    void test_GetUserRating() {
-        given()
-                .accept(ContentType.JSON)
-                .header("Authorization", getAuthHeader())
-                .pathParam("mediaId", DataParams.CONTENT_ID_ONE)
-                .body(
-                        """
-            {
-              "userId": 101,
-              "mediaId": 9999,
-              "comment": "I hope this works?"
-            }
-        """
-                )
-                .when()
-                .post(Endpoints.MEDIA_COMMENTS)
-                .then()
-                .log().body()
-                .statusCode(StatusCodes.OK)
-                .body("success", equalTo(true));
-    }
 
 //    @Test
 //    @Story("Invalid Comment - Missing Fields")

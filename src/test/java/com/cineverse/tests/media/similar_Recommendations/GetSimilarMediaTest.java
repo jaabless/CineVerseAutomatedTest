@@ -20,7 +20,7 @@ public class GetSimilarMediaTest extends BaseTest {
 
     @Test
     @DisplayName("Should return similar media for valid contentId")
-    void getSimilarMedia_ValidId_Positive() {
+    void getSimilarMedia() {
 
         given()
                 .accept(ContentType.JSON)

@@ -4,6 +4,7 @@ import com.cineverse.base.BaseTest;
 import com.cineverse.data.DataParams;
 import com.cineverse.data.Endpoints;
 import com.cineverse.data.StatusCodes;
+import io.qameta.allure.Story;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,9 @@ import static org.hamcrest.Matchers.notNullValue;
 public class GetTrailerDetailsTest extends BaseTest {
 
     @Test
-    @DisplayName("Should return similar media for valid contentId")
-    void getMediaTrailer_ValidId_Positive() {
+    @Story("GET Media Trailer")
+    @DisplayName("Test retrieving media trailer details by content ID")
+    void test_getMediaTrailerInfo() {
 
         given()
                 .accept(ContentType.JSON)
