@@ -1,0 +1,31 @@
+<div>POST to http://cineverse-service-alb-staging-276074081.eu-west-1.elb.amazonaws.com/api/v1/auth/register</div>
+
+    <h4>Body</h4>
+    <div>
+    <pre class="preformated-text">
+{
+    &quot;firstName&quot;: &quot;John&quot;,
+    &quot;lastName&quot;: &quot;Doe&quot;,
+    &quot;email&quot;: &quot;test_f150ed76-f34a-4c4a-b3f1-0247469ffdf8@example.com&quot;,
+    &quot;password&quot;: &quot;Password123@&quot;
+}    </pre>
+    </div>
+
+    <h4>Headers</h4>
+    <div>
+            <div>Accept: */*</div>
+            <div>Content-Type: application/json</div>
+    </div>
+
+
+
+    <h4>Curl</h4>
+    <div>
+        curl -v -X POST &#39;http://cineverse-service-alb-staging-276074081.eu-west-1.elb.amazonaws.com/api/v1/auth/register&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;firstName&quot;: &quot;John&quot;,
+    &quot;lastName&quot;: &quot;Doe&quot;,
+    &quot;email&quot;: &quot;test_f150ed76-f34a-4c4a-b3f1-0247469ffdf8@example.com&quot;,
+    &quot;password&quot;: &quot;Password123@&quot;
+}&#39;
+    </div>
+
