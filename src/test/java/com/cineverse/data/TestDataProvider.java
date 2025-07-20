@@ -38,8 +38,8 @@ public class TestDataProvider {
 
     public static Stream<Arguments> validLoginCredentials() {
         return Stream.of(
-                Arguments.of(new AuthLoginData("useremaidl@gmail.com!", "Password123@"), 200), // ensure this user is already registered
-                Arguments.of(new AuthLoginData("new111111email@gmail.com!", "Password123@"), 200),
+                Arguments.of(new AuthLoginData("newuseremail@gmail.com", "Password123@"), 200), // ensure this user is already registered
+                Arguments.of(new AuthLoginData("new111111email@gmail.com", "Password123@"), 200),
                 Arguments.of(new AuthLoginData("john.doe@example.com", "Password123@"), 200)
                 );
     }

@@ -1,4 +1,4 @@
-package com.cineverse.tests.auth;
+package com.cineverse.tests.authentication;
 
 import com.cineverse.base.BaseTest;
 import com.cineverse.data.TestDataProvider;
